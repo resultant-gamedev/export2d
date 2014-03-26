@@ -33,9 +33,9 @@ class RenderSpritesheetOperator(bpy.types.Operator):
         
         sprite_path = os.path.expanduser(context.scene.sprite_path)
         sprite_name = context.scene.sprite_name
-        sprite_colors = context.scene.sprite_colors
+        #sprite_colors = context.scene.sprite_colors
         
-        tools_path = context.scene.sprite_tools_path
+        #tools_path = context.scene.sprite_tools_path
         
         num_frames = context.scene.number_frames
         num_directions = context.scene.number_directions
@@ -65,14 +65,14 @@ class RenderSpritesheetOperator(bpy.types.Operator):
         print(cmd)
         r = os.system(cmd)
         
-        if sprite_colors != 0:
+        """if sprite_colors != 0:
             os.system('"'+tools_path+'/pngnqi" -vf -e -indexed.png -g 2.2 -s 1 -Q n -n '+str(sprite_colors)+' '+sprite_name+'.png')
             
             os.system('"'+tools_path+'/pngout" /y /ktEXt '+sprite_name+'-indexed.png '+sprite_name+'-indexed.png')
             
             os.remove(sprite_name+'.png')
             os.rename(sprite_name+'-indexed.png', sprite_name+'.png')
-
+        """
         #os.startfile(sprite_path)
         
         self._cleanup(sprite_path)
@@ -104,10 +104,10 @@ class RenderSpritePanel(bpy.types.Panel):
         row = self.layout.row()
         row.prop(bpy.context.scene, "sprite_x")
         row.prop(bpy.context.scene, "sprite_y")
-        row.prop(bpy.context.scene, "sprite_colors")
+        #row.prop(bpy.context.scene, "sprite_colors")
         
-        row = self.layout.row()
-        row.prop(bpy.context.scene, "sprite_tools_path")
+        #row = self.layout.row()
+        #row.prop(bpy.context.scene, "sprite_tools_path")
         
         row = self.layout.row()
         row.operator("render.render_sprite")
@@ -121,8 +121,8 @@ def register():
     bpy.types.Scene.sprite_y = bpy.props.IntProperty(name="Height", default=128)
     bpy.types.Scene.sprite_path = bpy.props.StringProperty(name="Sprite Path:", default="~")
     bpy.types.Scene.sprite_name = bpy.props.StringProperty(name="Sprite Name:", default="sprite")
-    bpy.types.Scene.sprite_tools_path = bpy.props.StringProperty(name="Tools Path:", default=addon_utils.paths()[1] + "/")
-    bpy.types.Scene.sprite_colors = bpy.props.IntProperty(name="Colors", default=0)
+    #bpy.types.Scene.sprite_tools_path = bpy.props.StringProperty(name="Tools Path:", default=addon_utils.paths()[1] + "/")
+    #bpy.types.Scene.sprite_colors = bpy.props.IntProperty(name="Colors", default=0)
     bpy.utils.register_class(RenderSpritesheetOperator)
     bpy.utils.register_class(RenderSpritePanel)
 
